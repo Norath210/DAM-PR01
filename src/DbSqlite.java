@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException; 
@@ -5,11 +7,10 @@ import java.sql.SQLException;
 
 public class DbSqlite {
 	private static DbSqlite instance;
+	private Connection conn = null;
 
 	private DbSqlite() {
-
-		this.init();
-		
+		this.init();		
 	}
 
 	public static DbSqlite getInstance() {
@@ -19,13 +20,31 @@ public class DbSqlite {
 		return instance;
 	}
 	
+	private void checkDbFiles() {
+		boolean fileExist = false;
+		File path = new File(Config.PATH_DB);
+		if(!path.exists()) {
+			path.mkdirs();
+		}
+		try {
+		File db = new File(path,Config.DBNAME);
+		if( db.createNewFile());
+		}catch (IOException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}finally {
+			if (fileExist) {
+				System.out.println("Base de Datos, Creada");
+			}
+		}
+	}
 	
-	public void init() {
-		String path = "C:/DAM2/AD/Practicas/Pr01/";
+	private Connection init() {
+		
 		Connection conn = null;
         try {
             // db parameters
-            String url = "jdbc:sqlite:"+path+"miTienda.db";
+            String url = "jdbc:sqlite:"+Config.PATH_DB;
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             
@@ -33,21 +52,10 @@ public class DbSqlite {
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-		
+            this.checkDbFiles();
+        } 
+		return conn;
 	}
+}
 	
 
-	public static void main(String[] args) {
-		DbSqlite db = DbSqlite.getInstance();
-	}
-
-}
