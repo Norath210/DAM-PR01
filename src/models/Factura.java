@@ -2,7 +2,9 @@ package src.models;
 
 import java.util.Date;
 
-public class Factura {
+import src.models.comun.DbObject;
+
+public class Factura extends DbObject {
 
 	private Integer id;
 	private Date created;
@@ -40,7 +42,17 @@ public class Factura {
 	public void setId_cliente(Integer id_cliente) {
 		this.id_cliente = id_cliente;
 	}
-	
+	public String getTable() {
+		return "facturas";
+	}
+	@Override
+	public String getCampos() {
+		return "fecha, serie, id_cliente";
+	}
+	@Override
+	public String getValues() {
+		return "'"+this.fecha+"','"+this.serie+"','"+this.id_cliente+"'";				
+	}
 	
 	
 }

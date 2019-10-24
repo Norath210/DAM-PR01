@@ -24,22 +24,18 @@ public class DbController {
 		return instance;
 	}
 	
-	public boolean saveDb(String TABLA, String campo, String valor) { 
+	public boolean saveDb(DbObject obj) {  
 		
-		String sqlExist = "select * from '"+TABLA+"' where '"+campo+"' = '"+valor+"'";
-		String sqlIns = "INSERT INTO "+TABLA+" ('"+campo+"') VALUES ('"+valor+"');";
+		String TABLA = obj.getTable();
+		String campos = obj.getCampos();
+		String valor = obj.getValues();
+		 
+		String sqlIns = "INSERT INTO "+TABLA+" ("+campos+") VALUES ("+valor+");";
+		System.out.println(sqlIns);
 		
 		try {
 			
-			Statement statemnt = this.con.createStatement();
-			
-			
-			ResultSet res = statemnt.executeQuery(sqlExist);
-			if (res.next()) {
-				System.out.println("Objeto "+TABLA+" - "+valor+" Ya Existe");
-				return false;
-			} 
-			
+			Statement statemnt = this.con.createStatement(); 
 			statemnt.execute(sqlIns);
 		 
 		} catch (SQLException e) { 

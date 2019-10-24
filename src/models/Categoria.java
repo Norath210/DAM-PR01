@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-public class Categoria {
+import src.models.comun.DbObject;
+
+public class Categoria extends DbObject {
 
 	private Integer id;
 	private Date created;
@@ -55,6 +57,26 @@ public class Categoria {
 		}
 		System.out.println("Categoria "+nombre+" Insertada");
 		return true;
+	}
+	
+	
+	@Override
+	public String getTable() {
+		return "categorias";
+	}
+	@Override
+	public String getCampos() {
+		String campos;
+		if(this.nombre==null) {
+		}else {
+			campos
+		}
+		
+		return "nombre";
+	}
+	@Override
+	public String getValues() {
+		return "'"+this.nombre+"'";				
 	}
 	
 	

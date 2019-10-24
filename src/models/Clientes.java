@@ -2,7 +2,9 @@ package src.models;
 
 import java.util.Date;
 
-public class Clientes {
+import src.models.comun.DbObject;
+
+public class Clientes extends DbObject {
 
 	private Integer id;
 	private Date created;
@@ -53,9 +55,50 @@ public class Clientes {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	} 
+	
+	
+	
+	@Override
+	public String getTable() {
+		return "clientes";
 	}
-	
-	
-	
+	@Override
+	public String getCampos() {
+		String campos = "";
+		if (this.nombre != null || !this.nombre.trim().isEmpty()) {
+			campos = campos + "nombre";
+		}
+		if(!campos.isEmpty()) {
+			campos = campos +", ";
+		}		
+		if (this.dni != null || !this.dni.trim().isEmpty()) {
+			campos = campos + "dni";
+		}
+		if(!campos.isEmpty()) {
+			campos = campos +", ";
+		}		
+		if (this.direccion != null || !this.direccion.trim().isEmpty()) {
+			campos = campos + "direccion";
+		}
+		if(!campos.isEmpty()) {
+			campos = campos +", ";
+		}		
+		if (this.telefono != null || !this.telefono.trim().isEmpty()) {
+			campos = campos + "telefono";
+		}
+		if(!campos.isEmpty()) {
+			campos = campos +", ";
+		}		
+		if (this.email != null || !this.email.trim().isEmpty()) {
+			campos = campos + "email";
+		}
+		
+		return campos;
+	}
+	@Override
+	public String getValues() {
+		return "'"+this.nombre+"','"+this.dni+"','"+this.direccion+"','"+this.telefono+"','"+this.email+"'";		
+	}
 	
 }

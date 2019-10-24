@@ -2,13 +2,15 @@ package src.models;
 
 import java.util.Date;
 
-public class FacturaLinea {
+import src.models.comun.DbObject;
+
+public class FacturaLinea extends DbObject{
 
 	private Integer id;
 	private Date created;
 	private Integer id_factura;
 	private String nombre;
-	private Integer precio; // 100 = 1,00
+	private Integer precio; // 100 = 1,00€
 	
 	public Integer getId() {
 		return id;
@@ -39,6 +41,18 @@ public class FacturaLinea {
 	}
 	public void setPrecio(Integer precio) {
 		this.precio = precio;
+	}
+	@Override
+	public String getTable() {
+		return "facturas_linea";
+	}
+	@Override
+	public String getCampos() {
+		return "id_factura, nombre, precio";
+	}
+	@Override
+	public String getValues() {
+		return "'"+id_factura+"','"+nombre+"','"+precio+"'";
 	}
 	
 	
