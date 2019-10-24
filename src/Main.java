@@ -1,25 +1,20 @@
-package src;
-import java.sql.Connection; 
-
-import src.models.Categoria;
-import src.models.comun.DbSqlite;
+package src; 
+import src.models.Clientes; 
 
 public class Main {
 
 	public static void main(String[] args) {
 		
 		// Hacer el Backup del día
-		Backup.getInstance().doBackup();
+		//Backup.getInstance().doBackup();  
 		
-		// Comprobar que la base de datos existe
-		DbSqlite db = DbSqlite.getInstance();
-		Connection con = db.getConnection();
-		
-		// Arrancar
-		
-		 
-		Categoria.saveDb(con, "Categoria 02");
-		
+		Clientes client = new Clientes();
+		client.setNombre("cliente 02");
+		client.setEmail("user02@user.com");
+		client.setDni("1234");
+		client.setTelefono("1234567");
+		  
+		client.save();
 		
 		//statemnt.executeQuery(sql);
 		
