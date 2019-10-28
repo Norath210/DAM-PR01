@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
@@ -5,3 +6,12 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Sqlite"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Sqlite"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
+>>>>>>> e
