@@ -90,8 +90,8 @@ public class Factura extends DbObject{
 	public String toString() {
 		return this.getValues();
 	}
-	@Override
-	public Factura createByValues(String values) {
+
+	public static Factura createByValues(String values) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		
 		Factura item = new Factura();

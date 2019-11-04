@@ -13,7 +13,6 @@ public abstract class DbObject {
 	public abstract String getValues();
 	public abstract DbObject getDbObject(ResultSet res) throws SQLException;
 	
-	public abstract DbObject createByValues(String values)throws Exception;
 	
 	/**
 	@return todos los campos del DbObject en cuestión

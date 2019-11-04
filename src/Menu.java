@@ -57,29 +57,57 @@ public class Menu {
 		
 	}
 	private static void borrar() {
-		// TODO Auto-generated method stub
-		
-	}
-	private static void crear() {
+		System.out.println("Tipo de dato a borrar?");
 		mostrarTablas();
 		opcion = keyboardScanner.nextLine();
 		switch (opcion) {
 		case "1":
-			System.out.println(rellenarDatos(new Clientes()));			
+			System.out.println("Elija el cliente a borrar");
+			seleccionarObjeto(new Clientes()).delete();;
 			break;
 		case "2":
-			rellenarDatos(new Categoria());
+			seleccionarObjeto(new Categoria()).delete();
 			break;
 		case "3":
-			rellenarDatos(new Factura());
+			seleccionarObjeto(new Factura()).delete();
+			break;
+		case "4": 
+			seleccionarObjeto(new Producto()).delete();
+			break;
+		case SALIR:
+			System.out.println("ByeBye");
+			break;
+		default:
+			System.out.println("Opción no válida");
+			break;
+			}
+		
+	}
+	
+	private static void crear() {
+		String datos;
+		mostrarTablas();
+		opcion = keyboardScanner.nextLine();
+		switch (opcion) {
+		case "1":
+			datos = rellenarDatos(new Clientes());
+			Clientes.createByValues(datos).save();
+			break;
+		case "2":
+			datos = rellenarDatos(new Categoria());
+			Categoria.createByValues(datos).save();
+			break;
+		case "3":
+			datos = rellenarDatos(new Factura());
+			Factura.createByValues(datos).save();
 			break;
 		case "4":
-			rellenarDatos(new Producto());
+			datos = rellenarDatos(new Producto());
+			Producto.createByValues(datos).save();
 			break;
 			
 		case SALIR:
 			System.out.println("ByeBye");
-			keyboardScanner.close();
 			break;
 		default:
 			System.out.println("Opción no válida");
@@ -115,7 +143,6 @@ public class Menu {
 			break;
 		case SALIR:
 			System.out.println("ByeBye");
-			keyboardScanner.close();
 			break;
 		default:
 			System.out.println("Opción no válida");

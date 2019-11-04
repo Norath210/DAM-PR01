@@ -102,8 +102,8 @@ public class Producto extends DbObject {
 	public String toString() {
 		return this.getValues();
 	}
-	@Override
-	public Producto createByValues(String values) {
+	
+	public static Producto createByValues(String values) {
 		
 
 		Clientes item = new Clientes();

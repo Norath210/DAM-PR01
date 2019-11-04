@@ -62,13 +62,13 @@ public class Categoria extends DbObject {
 		
 		return item;
 	}
-	@Override
-	public Categoria createByValues(String values) {
-		
+
+	public static Categoria createByValues(String values) {
+		Categoria item = new Categoria();		
 		String[] arValues = values.split(",");
-		this.nombre = arValues[0];	
+		item.setNombre(arValues[0]) ;	
 			
-		return this;
+		return item;
 		
 	}
 	public String getAllCampos() {

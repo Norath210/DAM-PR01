@@ -86,8 +86,8 @@ public class FacturaLinea extends DbObject {
 	public String toString() {
 		return this.getValues();
 	}
-	@Override
-	public FacturaLinea createByValues(String values) {
+
+	public static FacturaLinea createByValues(String values) {
 		
 		FacturaLinea item = new FacturaLinea();
 		String[] arValues = values.split(",");

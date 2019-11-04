@@ -108,8 +108,8 @@ public class Clientes extends DbObject {
 		return item;
 	}
 	
-	@Override
-	public Clientes createByValues(String values) {
+
+	public static Clientes createByValues(String values) {
 		
 		Clientes item = new Clientes();
 		String[] arValues = values.split(",");
