@@ -71,6 +71,9 @@ public class Categoria extends DbObject {
 		return this;
 		
 	}
+	public String getAllCampos() {
+		return "nombre";
+	}
 	
 	
 	

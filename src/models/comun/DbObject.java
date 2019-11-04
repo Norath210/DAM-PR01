@@ -15,6 +15,11 @@ public abstract class DbObject {
 	
 	public abstract DbObject createByValues(String values)throws Exception;
 	
+	/**
+	@return todos los campos del DbObject en cuestión
+	*/
+	public abstract String getAllCampos();
+	
 	
 	public void save() {
 		DbController.getInstance().saveDb(this);

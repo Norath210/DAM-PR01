@@ -122,5 +122,10 @@ public class Clientes extends DbObject {
 		return item;
 		
 	}
+	@Override
+	public String getAllCampos() {
+		return "nombre, dni, direccion, telefono, email";
+	}
+	
 	
 }

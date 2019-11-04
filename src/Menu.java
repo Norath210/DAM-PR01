@@ -161,7 +161,7 @@ public class Menu {
 	*/
 	private static String rellenarDatos(DbObject modelo){
 		
-		String[] campos = modelo.getCampos().split(",");
+		String[] campos = modelo.getAllCampos().split(",");
 		String datos = new String();	
 		String entrada = new String();
 		

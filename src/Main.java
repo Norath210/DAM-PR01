@@ -40,6 +40,9 @@ public class Main {
 		// Hacer el Backup del día
 		//Backup.getInstance().doBackup();  
 		
+		/**
+		 * 
+		 * 
 		 Categoria cat = new Categoria();
 		 cat.setNombre("Cat 01");
 		 //cat.save();
@@ -61,11 +64,13 @@ public class Main {
 		 for (DbObject dbObject : productos) {
 			Producto p = (Producto) dbObject;
 			p.delete();
-			/**
+			
 			p.setPrecio(100);
 			p.save(); 
-			*/
+		
 		} 
+		 *
+		 */
 		 
 		 Clientes cli = new Clientes();
 		 cli.setNombre("Cliente");

@@ -110,4 +110,7 @@ public class Factura extends DbObject{
 		return item;
 	
 	}
+	public String getAllCampos() {
+		return "fecha, serie, id_cliente";
+	}
 }

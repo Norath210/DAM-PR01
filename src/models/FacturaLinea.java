@@ -87,23 +87,22 @@ public class FacturaLinea extends DbObject {
 		return this.getValues();
 	}
 	@Override
-	public Factura createByValues(String values) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	public FacturaLinea createByValues(String values) {
 		
-		Factura item = new Factura();
+		FacturaLinea item = new FacturaLinea();
 		String[] arValues = values.split(",");
 		
 		
-		try {
-			item.setFecha(sdf.parse(arValues[0]));
-		} catch (ParseException e) {
-			System.err.println("Error al formatear la fecha");
-			e.printStackTrace();
-		}
-		item.setSerie(Integer.parseInt(arValues[1]));
-		item.setId_cliente(Integer.parseInt(arValues[2]));
+		
+		item.setId_factura(Integer.parseInt(arValues[0]));
+		item.setNombre(arValues[1]);
+		item.setPrecio(Integer.parseInt(arValues[2]));
 			
 		return item;
+	}
+	@Override
+	public String getAllCampos() {	
+		return "id_factura, nombre, precio";
 	}
 	
 }

@@ -68,6 +68,10 @@ public class Producto extends DbObject {
 		campos = getCorrectCampos(campos, "id_categoria" , this.id_categoria);  
 		return campos;
 	}
+	
+	
+	
+	
 	@Override
 	public String getValues() {
 		String value = ""; 
@@ -111,6 +115,9 @@ public class Producto extends DbObject {
 		item.setEmail(arValues[4]);
 		
 		return null;
+	}
+	public String getAllCampos() {
+		return "nombre, precio, stock,id_categoría";
 	}
 	
 	
