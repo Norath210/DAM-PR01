@@ -60,9 +60,11 @@ public class Main {
 		 List<DbObject> productos = prod.list();
 		 for (DbObject dbObject : productos) {
 			Producto p = (Producto) dbObject;
-			//p.delete();
+			p.delete();
+			/**
 			p.setPrecio(100);
 			p.save(); 
+			*/
 		} 
 		 
 		 Clientes cli = new Clientes();

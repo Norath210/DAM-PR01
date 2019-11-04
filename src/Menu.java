@@ -127,7 +127,7 @@ public class Menu {
 	private static void leer() {
 		System.out.println("¿Qué tabla desea ver?");
 		mostrarTablas();
-		
+		opcion = keyboardScanner.nextLine();
 		switch (opcion) {
 		case "1":
 			System.out.println("Elija el cliente a ver en detalle");
@@ -155,7 +155,10 @@ public class Menu {
 		
 	}
 
-	
+	/**
+	* @param modelo - Una clase que descienda de DbObject
+	* @return - La lista de valores en el orden en el que vengan en getCampos()
+	*/
 	private static String rellenarDatos(DbObject modelo){
 		
 		String[] campos = modelo.getCampos().split(",");
