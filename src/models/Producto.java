@@ -89,7 +89,7 @@ public class Producto extends DbObject {
 		int created = res.getInt("created");
 		Date date = new Date(created);		
 		item.setCreated( date );
-		
+		item.setId(res.getInt("id"));
 		item.setNombre( res.getString("nombre") );
 		item.setPrecio( res.getInt("precio") );
 		item.setStock( res.getInt("stock") );
