@@ -166,7 +166,7 @@ public class DbController {
 	 * <strong>EJERCICIO</strong>
 	 *  Dado un ID de un modelo; devuelve el elemento de la base de datos.
 	 *  
-	 * @param dbObject - una clase que extienda de DbObject
+	 * @param obj - una clase que extienda de DbObject
 	 * @param id - ID que tenemos que buscar en la tabla del objeto
 	 * @return - En caso de encontrar el registro; debe devolver un objeto de ese tipo. <br/> En caso de no encontrarlo; debe devovler un NULL. <br/> En caso de Exception; devolver null.
 	 */

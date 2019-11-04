@@ -3,6 +3,7 @@ package src.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import src.models.comun.DbObject;
 
@@ -97,5 +98,7 @@ public class Producto extends DbObject {
 	public String toString() {
 		return this.getValues();
 	}
+	
+	
 	
 }

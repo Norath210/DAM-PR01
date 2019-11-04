@@ -1,6 +1,7 @@
 package src; 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import src.models.Categoria;
 import src.models.Clientes;
@@ -30,6 +31,69 @@ public class Main {
 	 * *-> Para nota ;)
 	 * 
 	 */
+	
+	private static void menuPrincipal() {
+		char opcion = 0;
+		Scanner keyboardScanner = new Scanner(System.in);
+		while (opcion!=4) {
+			System.out.println("Pulse el número de la opcion del menú");
+			System.out.println("1.Crear");
+			System.out.println("2.Listar");
+			System.out.println("3.Actualizar");
+			System.out.println("4.Salir");		
+			
+			opcion = keyboardScanner.nextLine().charAt(0);
+			switch (opcion) {
+			case '1':
+				menuCrear();
+				break;
+			case '2':
+				menuLeer();
+				break;
+			case '3':
+				menuActualizar();
+				break;
+			case '4':
+				System.out.println("ByeBye");
+				keyboardScanner.close();
+				break;
+			default:
+				System.out.println("Opción no válida");
+				break;
+			}
+		}
+		
+	}
+	private static void mostrarTablas() {
+
+		System.out.println("1.Clientes");
+		System.out.println("2.Categoría");
+		System.out.println("3.Facturas");
+		
+	}
+	
+
+	private static void menuActualizar() {
+		System.out.println("¿Qué desea actualizar?");
+		mostrarTablas();		
+		
+	}
+
+
+	
+
+
+	private static void menuLeer() {
+		System.out.println("¿Qué desea Leer?");
+		mostrarTablas();
+	}
+
+
+	private static void menuCrear() {
+		System.out.println("¿Qué desea actualizar?");
+		mostrarTablas();
+	}
+
 
 	public static void main(String[] args) {
 		
@@ -74,6 +138,9 @@ public class Main {
 		//statemnt.executeQuery(sql);
 		
 		//con.prepareStatement(sql)
+		 
+		 menuPrincipal();
+		 
 	 
 	}
 
