@@ -1,53 +1,7 @@
-<<<<<<< HEAD
 package src.models;
 
-import java.util.Date;
-
-public class Producto {
-
-	private Integer id;
-	private Date created;
-	private String nombre;
-	private Integer precio; // 100 = 1,00
-	private Integer stock;
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Date getCreated() {
-		return created;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public Integer getPrecio() {
-		return precio;
-	}
-	public void setPrecio(Integer precio) {
-		this.precio = precio;
-	}
-	public Integer getStock() {
-		return stock;
-	}
-	public void setStock(Integer stock) {
-		this.stock = stock;
-	}
-	
-	
-	
-}
-=======
-package src.models;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import src.models.comun.DbObject;
@@ -65,13 +19,13 @@ public class Producto extends DbObject {
 	public Integer getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	private void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(Date created) {
+	private void setCreated(Date created) {
 		this.created = created;
 	}
 	public String getNombre() {
@@ -123,6 +77,25 @@ public class Producto extends DbObject {
 		return value;		
 	}
 	
+	@Override
+	public DbObject getDbObject(ResultSet res) throws SQLException {
+		Producto item = new Producto();
+		
+		int created = res.getInt("created");
+		Date date = new Date(created);		
+		item.setCreated( date );
+		
+		item.setNombre( res.getString("nombre") );
+		item.setPrecio( res.getInt("precio") );
+		item.setStock( res.getInt("stock") );
+		item.setId_categoria( res.getInt("id_categoria") );
+				
+		return item;
+	} 
+	
+	@Override
+	public String toString() {
+		return this.getValues();
+	}
 	
 }
->>>>>>> e

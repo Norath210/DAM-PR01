@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-- Tienda (TPV = Terminal Punto Venta)
-=> Clientes -> Si, pero.
-- Usuario - Factura
-	=> nombre
-	=> dni
-	=> direccion
-	=> telefono
-	=> email
-- Cliente Contado - Ticket => ID_Ticket
-=> Inventario
-- Categorias -> Producto->MN->Categorias
-- Productos -> Stock -> Entradas y Salidas
-=> Facturas
-- ID_Ticket || ID_Factura
-- [] Lineas_factura
-=======
 - Tienda (TPV = Terminal Punto Venta)
 => Clientes -> Si, pero.
 - Usuario - Factura
@@ -30,5 +13,4 @@
 => Facturas
 - ID_Ticket || ID_Factura
 - [] Lineas_factura
->>>>>>> e
-=> Pasarela de Pago - Simulada
+=> Pasarela de Pago - (Simulada)

@@ -1,33 +1,34 @@
-<<<<<<< HEAD
 package src.models.comun;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 public abstract class DbObject {
 
-	public abstract String getTable();	 //Devuelve el nombre de la tabla
-	public abstract String getCampos();  //Devuelve el nombre de los campos que se rellenan en la BD (todo salvo ID y fecha de inserción
-	public abstract String getValues();	 //Recuperar los valores de los campos de la BD
 	
-	public void save() {
-		DbController.getInstance().saveDb(this);
-	}
-	public String formatCampo(String lCampos,String nombreCampo, Object Valor) {
-		
-	}
-}
-=======
-package src.models.comun;
-
-import java.sql.Date;
-
-public abstract class DbObject {
-
+	public abstract Integer getId();
 	public abstract String getTable();
 	public abstract String getCampos();
 	public abstract String getValues();
+	public abstract DbObject getDbObject(ResultSet res) throws SQLException;
 	
 	public void save() {
 		DbController.getInstance().saveDb(this);
 	}
+	
+	public List<DbObject> list() {
+		return DbController.getInstance().list(this);
+	}
+	
+	public void delete() { 
+		DbController.getInstance().deleteDb(this);
+	}
+	
+	public DbObject getByid(Integer id) {
+		return DbController.getInstance().getByid(this, id);
+	}
+	
 	
 	private boolean isNullOrEmpty(Object value) {
 		if (value == null) {
@@ -72,6 +73,6 @@ public abstract class DbObject {
 		} 
 		
 		return data+",'"+value+"'";
-	}
+	} 
+	
 }
->>>>>>> e
