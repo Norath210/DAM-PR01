@@ -2,6 +2,8 @@ package src.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import src.models.comun.DbObject;
@@ -83,6 +85,25 @@ public class FacturaLinea extends DbObject {
 	@Override
 	public String toString() {
 		return this.getValues();
+	}
+	@Override
+	public Factura createByValues(String values) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
+		Factura item = new Factura();
+		String[] arValues = values.split(",");
+		
+		
+		try {
+			item.setFecha(sdf.parse(arValues[0]));
+		} catch (ParseException e) {
+			System.err.println("Error al formatear la fecha");
+			e.printStackTrace();
+		}
+		item.setSerie(Integer.parseInt(arValues[1]));
+		item.setId_cliente(Integer.parseInt(arValues[2]));
+			
+		return item;
 	}
 	
 }

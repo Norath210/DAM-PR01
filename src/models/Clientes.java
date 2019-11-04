@@ -108,4 +108,19 @@ public class Clientes extends DbObject {
 		return item;
 	}
 	
+	@Override
+	public Clientes createByValues(String values) {
+		
+		Clientes item = new Clientes();
+		String[] arValues = values.split(",");
+		item.setNombre(arValues[0]);
+		item.setDni(arValues[1]);
+		item.setDireccion(arValues[2]);
+		item.setTelefono(arValues[3]);
+		item.setEmail(arValues[4]);
+			
+		return item;
+		
+	}
+	
 }

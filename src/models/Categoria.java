@@ -62,6 +62,16 @@ public class Categoria extends DbObject {
 		
 		return item;
 	}
+	@Override
+	public Categoria createByValues(String values) {
+		
+		String[] arValues = values.split(",");
+		this.nombre = arValues[0];	
+			
+		return this;
+		
+	}
+	
 	
 	
 	

@@ -98,6 +98,20 @@ public class Producto extends DbObject {
 	public String toString() {
 		return this.getValues();
 	}
+	@Override
+	public Producto createByValues(String values) {
+		
+
+		Clientes item = new Clientes();
+		String[] arValues = values.split(",");
+		item.setNombre(arValues[0]);
+		item.setDni(arValues[1]);
+		item.setDireccion(arValues[2]);
+		item.setTelefono(arValues[3]);
+		item.setEmail(arValues[4]);
+		
+		return null;
+	}
 	
 	
 	

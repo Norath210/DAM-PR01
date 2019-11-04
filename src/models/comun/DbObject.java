@@ -13,6 +13,9 @@ public abstract class DbObject {
 	public abstract String getValues();
 	public abstract DbObject getDbObject(ResultSet res) throws SQLException;
 	
+	public abstract DbObject createByValues(String values)throws Exception;
+	
+	
 	public void save() {
 		DbController.getInstance().saveDb(this);
 	}
@@ -75,4 +78,7 @@ public abstract class DbObject {
 		return data+",'"+value+"'";
 	} 
 	
+	
+	
+		
 }
