@@ -99,15 +99,18 @@ public class Factura extends DbObject{
 		
 		
 		try {
-			item.setFecha(sdf.parse(arValues[0]));
+			item.setFecha(sdf.parse(arValues[0]));		
+			item.setSerie(Integer.valueOf(arValues[1]));
+			item.setId_cliente(Integer.valueOf(arValues[2]));
+			
+			return item;
 		} catch (ParseException e) {
 			System.err.println("Error al formatear la fecha");
 			e.printStackTrace();
+			return null;
 		}
-		item.setSerie(Integer.parseInt(arValues[1]));
-		item.setId_cliente(Integer.parseInt(arValues[2]));
 			
-		return item;
+		
 	
 	}
 	public String getAllCampos() {

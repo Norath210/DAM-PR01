@@ -103,19 +103,23 @@ public class Producto extends DbObject {
 		return this.getValues();
 	}
 	
-	public static Producto createByValues(String values) {
+	public static Producto createByValues(String values) {		
 		
-
-		Clientes item = new Clientes();
+		Producto item = new Producto();
 		String[] arValues = values.split(",");
-		item.setNombre(arValues[0]);
-		item.setDni(arValues[1]);
-		item.setDireccion(arValues[2]);
-		item.setTelefono(arValues[3]);
-		item.setEmail(arValues[4]);
 		
-		return null;
+		if(new Producto().getByid(Integer.parseInt(arValues[3]))!=null) {
+			item.setNombre(arValues[0]);
+			item.setPrecio( Integer.parseInt(arValues[1]) );
+			item.setStock(Integer.parseInt(arValues[2]));
+			item.setId_categoria(Integer.parseInt(arValues[3]));
+			return item;
+		}else {
+			System.err.println("La categoría de producto introducida no existe");
+			return null;
+		}
 	}
+	
 	public String getAllCampos() {
 		return "nombre, precio, stock,id_categoría";
 	}

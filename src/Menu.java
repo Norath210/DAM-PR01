@@ -57,7 +57,7 @@ public class Menu {
 		
 	}
 	private static void borrar() {
-		System.out.println("Tipo de dato a borrar?");
+		System.out.println("¿Tipo de dato a borrar?");
 		mostrarTablas();
 		opcion = keyboardScanner.nextLine();
 		switch (opcion) {
@@ -70,6 +70,10 @@ public class Menu {
 			break;
 		case "3":
 			seleccionarObjeto(new Factura()).delete();
+			while(opcion.toLowerCase().equals("n")||opcion.toLowerCase().equals("s")) {
+				System.out.println("Desea borrar las líneas de ésta factura? [S]/[N]");
+				opcion = keyboardScanner.nextLine().
+			}
 			break;
 		case "4": 
 			seleccionarObjeto(new Producto()).delete();
@@ -152,7 +156,7 @@ public class Menu {
 	}
 
 	private static void leer() {
-		System.out.println("¿Qué tabla desea ver?");
+		System.out.println("¿Sobre qué tabla desea ver?");
 		mostrarTablas();
 		opcion = keyboardScanner.nextLine();
 		switch (opcion) {

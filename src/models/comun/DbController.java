@@ -170,7 +170,7 @@ public class DbController {
 	 * @param id - ID que tenemos que buscar en la tabla del objeto
 	 * @return - En caso de encontrar el registro; debe devolver un objeto de ese tipo. <br/> En caso de no encontrarlo; debe devovler un NULL. <br/> En caso de Exception; devolver null.
 	 */
-	public DbObject getByid(DbObject obj, Integer id) {
+	public  DbObject getByid(DbObject obj, Integer id) {
 
 		String sql = "SELECT * FROM "+obj.getTable()+" WHERE id="+id; 
 		List<DbObject> dev = this.doExecuteQuery(sql, obj);
@@ -180,6 +180,21 @@ public class DbController {
 		}
 		
 		return dev.get(0);
+	}	
+	
+	/**
+	* @param campo - campo por el que buscar
+	* @param valor - valor que tenemos que buscar en la tabla del objeto
+	* @return - En caso de encontrar el registro; debe devolver una lista de
+	*   objeto de ese tipo. <br/> En caso de no encontrarlo; lista vacía. <br/>
+	*   caso de Exception; devolver null.
+	*/	
+	public List<DbObject> getByCampo(String campo, String valor ,DbObject obj){
+		String sql = "SELECT * FROM "+obj.getTable()+" where " + campo + " = "+ valor;
+		List<DbObject> dev = DbController.getInstance().doExecuteQuery(sql, obj);
+		
+		
+		return dev;
 	}
-
+	
 }

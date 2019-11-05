@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import src.models.comun.DbController;
 import src.models.comun.DbObject;
 
 public class FacturaLinea extends DbObject {
@@ -92,17 +94,34 @@ public class FacturaLinea extends DbObject {
 		FacturaLinea item = new FacturaLinea();
 		String[] arValues = values.split(",");
 		
-		
-		
-		item.setId_factura(Integer.parseInt(arValues[0]));
-		item.setNombre(arValues[1]);
-		item.setPrecio(Integer.parseInt(arValues[2]));
-			
-		return item;
+		if(new FacturaLinea().getByid(Integer.valueOf(arValues[2]))!=null) {		
+			item.setId_factura(Integer.valueOf(arValues[0]));
+			item.setNombre(arValues[1]);
+			item.setPrecio(Integer.valueOf(arValues[2]));				
+			return item;
+		}else {
+		return null;
+		}
 	}
 	@Override
 	public String getAllCampos() {	
 		return "id_factura, nombre, precio";
 	}
+	public boolean borrarLineas(Integer id) {
+		if (id == null) {
+			return false;
+		}
+		List<DbObject> lineas = DbController.getInstance().getByCampo("id_factura", id+"", new FacturaLinea()) ;
+		
+		for(DbObject lf : lineas) {
+			lf.delete();
+		}
+		
+			
+		return true;
+	}
+	
+	
+	
 	
 }
