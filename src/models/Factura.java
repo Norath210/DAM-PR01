@@ -116,4 +116,24 @@ public class Factura extends DbObject{
 	public String getAllCampos() {
 		return "fecha, serie, id_cliente";
 	}
+	@Override
+	public void verTodos() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void ver() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public DbObject crearPorTeclado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void editarPorTeclado() {
+		// TODO Auto-generated method stub
+		
+	}
 }

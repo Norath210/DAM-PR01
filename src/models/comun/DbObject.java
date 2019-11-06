@@ -3,6 +3,7 @@ package src.models.comun;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 public abstract class DbObject {
 
@@ -12,6 +13,12 @@ public abstract class DbObject {
 	public abstract String getCampos();
 	public abstract String getValues();
 	public abstract DbObject getDbObject(ResultSet res) throws SQLException;
+	
+	public abstract void verTodos(); 
+	public abstract void ver();
+	public abstract DbObject crearPorTeclado();
+	public abstract void editarPorTeclado();
+	
 	
 	
 	/**
@@ -80,7 +87,33 @@ public abstract class DbObject {
 		} 
 		
 		return data+",'"+value+"'";
-	} 
+	}
+	
+	public DbObject seleccionarObjeto() {
+		
+		Scanner keyboardScanner= new Scanner(System.in);
+		int id=-1;
+		List<DbObject> tabla = DbController.getInstance().list(this);
+		if (tabla.isEmpty()) {
+			System.out.println("No hay nada en la tabla");
+			return null;
+		}
+		for(DbObject obj: tabla ) {	
+			System.out.println(obj.getId()+" "+obj.toString());
+		}
+		System.out.println("Introduzca la ID del objeto de "+this.getTable()+ " que quiera seleccionar ");
+		try {
+		id = Integer.parseInt(keyboardScanner.nextLine());
+		}catch(Exception ex){
+			
+		}
+		DbObject pedido = this.getByid(id);
+		return pedido; 
+	}
+	
+	
+	
+	
 	
 	
 	
