@@ -14,7 +14,7 @@ public abstract class DbObject {
 	public abstract String getValues();
 	public abstract DbObject getDbObject(ResultSet res) throws SQLException;
 	
-	public abstract void verTodos(); 
+	
 	public abstract void ver();
 	public abstract DbObject crearPorTeclado();
 	public abstract void editarPorTeclado();
@@ -91,13 +91,17 @@ public abstract class DbObject {
 	
 	public DbObject seleccionarObjeto() {
 		
-		Scanner keyboardScanner= new Scanner(System.in);
+		
 		int id=-1;
-		List<DbObject> tabla = DbController.getInstance().list(this);
+		List<DbObject> tabla =this.listarTodos();
 		if (tabla.isEmpty()) {
 			System.out.println("No hay nada en la tabla");
 			return null;
 		}
+		
+		Scanner keyboardScanner= new Scanner(System.in);
+		
+		
 		for(DbObject obj: tabla ) {	
 			System.out.println(obj.getId()+" "+obj.toString());
 		}
@@ -105,17 +109,36 @@ public abstract class DbObject {
 		try {
 		id = Integer.parseInt(keyboardScanner.nextLine());
 		}catch(Exception ex){
-			
+			System.out.println("Id no válida");
+		}finally {
+			keyboardScanner.close();
 		}
 		DbObject pedido = this.getByid(id);
+		
 		return pedido; 
 	}
 	
+	public List<DbObject> listarTodos(){
 	
+	List<DbObject> tabla = DbController.getInstance().list(this);
+	return tabla;
+	}
 	
-	
-	
-	
+	public void verTodos() {
+		
+		List<DbObject> tabla = this.listarTodos();
+		
+		if (tabla.isEmpty()) {
+			System.out.println("No hay nada en la tabla");
+			return;
+		}
+		
+		for(DbObject obj: tabla ) {	
+			System.out.println(obj.getId()+" "+obj.toString());
+		}
+		
+		
+	}
 	
 		
 }

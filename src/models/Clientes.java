@@ -3,7 +3,9 @@ package src.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
+import src.models.comun.DbController;
 import src.models.comun.DbObject;
 
 public class Clientes extends DbObject {
@@ -128,8 +130,19 @@ public class Clientes extends DbObject {
 	}
 	@Override
 	public void verTodos() {
-		// TODO Auto-generated method stub
+		List<DbObject> tabla = this.listarTodos();
 		
+		if (tabla.isEmpty()) {
+			System.out.println("No hay nada en la tabla");
+			return;
+		}
+		
+		for(DbObject obj: tabla ) {	
+			Clientes cli =(Clientes) obj;
+			
+			System.out.println(cli.getId()+" "+obj.toString());
+		}
+				
 	}
 	@Override
 	public void ver() {

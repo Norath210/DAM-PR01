@@ -25,18 +25,18 @@ public class DbController {
 		}
 		return instance;
 	}
-	
+
 	public Connection getConnection() {
 		return con;
 	}
-	
+
 	private boolean doExecute(String sql) {
 		try {
-			
-			Statement statemnt = this.con.createStatement(); 
+
+			Statement statemnt = this.con.createStatement();
 			statemnt.execute(sql);
-		 
-		} catch (SQLException e) { 
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e);
 			return false;
