@@ -11,7 +11,7 @@ import src.models.comun.DbController;
 import src.models.comun.DbObject;
 import sun.awt.AWTAccessor.MenuAccessor;
 
-public class Menu {
+public class MenuOld {
 	private static final String SALIR = "0";
 
 	
@@ -19,14 +19,14 @@ public class Menu {
 	
 	private static DbObject modelo;
 	
-	private static Menu instance;
+	private static MenuOld instance;
 
-	private Menu() {
+	private MenuOld() {
 	}
 
-	public static Menu getInstance() {
+	public static MenuOld getInstance() {
 		if (instance == null) {
-			instance = new Menu();
+			instance = new MenuOld();
 		}
 		return instance;
 	}
@@ -34,7 +34,7 @@ public class Menu {
 	public static void menuPrincipal() {
 		String opcion = "";
 		while (!opcion.equals(SALIR)) {
-			System.out.println("¿Que tabla quiere manejar?");
+			System.out.println("¿Qué tabla quiere manejar?");
 			System.out.println("1.Categoría");
 			System.out.println("2.Clientes");
 			System.out.println("3.Factura");

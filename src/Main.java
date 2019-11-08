@@ -8,7 +8,7 @@ import src.models.Clientes;
 import src.models.Producto;
 import src.models.comun.DbObject;
 import src.models.comun.Tools; 
-import src.Menu;
+import src.MenuOld;
 public class Main {
 	
 	/**
@@ -86,7 +86,7 @@ public class Main {
 		
 		//con.prepareStatement(sql)
 		 
-		 Menu.menuPrincipal();
+		 MenuOld.menuPrincipal();
 		 
 	 
 	}
