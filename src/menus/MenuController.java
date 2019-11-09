@@ -20,27 +20,22 @@ public class MenuController {
 		}
 		return instance;
 	}
-	
-	
-	public void startMenus() {
+	public void callMenus() {
 		menu = new MenuPrincipal();
-		String opcion;
-		
-		
-		System.out.println(menu.toString());
-		opcion = this.keyboard.nextLine();
-		menu = menu.eligeOpcion(opcion);
-		
-		System.out.println(menu.toString());
-		opcion = this.keyboard.nextLine();
-		menu = menu.eligeOpcion(opcion);
-		
+		while(menu!=null) {
+			navegarMenu();
+		}
+		keyboard.close();
+		System.out.println("ByeBye");		
 	}
+	
+	
+
 	public void navegarMenu() {
 		String opcion;
 		System.out.println(menu.toString());
 		opcion = this.keyboard.nextLine();
-		menu = menu.eligeOpcion(opcion);
+		menu = menu.siguienteMenu(opcion);
 	}
 	
 	

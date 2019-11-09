@@ -17,44 +17,37 @@ public class MenuPrincipal extends Menu{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return 
-				"¿Qué tabla quiere manejar?"+
-				"1.Categoría"+
-				"2.Clientes"+
-				"3.Factura"+
-				"4.Producto"+
+				"¿Qué tabla quiere manejar? \n"+
+				"1.Categoría \n"+
+				"2.Clientes \n"+
+				"3.Factura \n"+
+				"4.Producto \n"+
 				
 				"0.Salir"	;
 	}
 	
 	@Override
-	protected Menu eligeOpcion(String opcion) {
-	while (!opcion.equals("0")) {	
-		
+	protected Menu siguienteMenu(String opcion) {
+	while (!opcion.equals("0")) {			
 		
 		switch (opcion) {
 		case "1":
-			return new MenuCategoria();
-			break;
+			return new MenuCategorias();
 		case "2":
 			return new MenuClientes();
-			break;
 		case "3": 
-			return new MenuFactura();
-			break;
+			return new MenuFacturas();
 		case "4": 
 			return new MenuProductos();
-			break;
 		case "0":
-			System.out.println("ByeBye");	
 			return null;
 		default:
 			System.out.println("Opción no válida");
 			break;
 		}
-		menuAccion(modelo);	
 	}
 	
-}
+
 		return null;
 	}
 
