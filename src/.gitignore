@@ -1,5 +1,5 @@
-/Backup.class
-/Config.class
-/Main.class
-/Menu.class
-/TestUnit.class
+/Categoria.class
+/Producto.class
+/Factura.class
+/FacturaLinea.class
+/Clientes.class
