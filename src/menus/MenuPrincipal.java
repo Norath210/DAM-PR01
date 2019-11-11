@@ -27,7 +27,7 @@ public class MenuPrincipal extends Menu{
 	}
 	
 	@Override
-	protected Menu siguienteMenu(String opcion) {
+	public Menu siguienteMenu(String opcion) {
 	while (!opcion.equals("0")) {			
 		
 		switch (opcion) {

@@ -17,14 +17,14 @@ public class MenuCategorias extends Menu {
 				"3.Actualizar una categoría \n"+
 				"4.Borrar una categoría \n"+				
 				
-				"0.Volver"	;
+				"0.Volver al menú principal"	;
 	}
 	
 	
 	
 	
 	@Override
-	protected Menu siguienteMenu(String opcion) {
+	public Menu siguienteMenu(String opcion) {
 		while (!opcion.equals("0")) {			
 				
 				switch (opcion) {

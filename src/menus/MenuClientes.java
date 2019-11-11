@@ -11,23 +11,23 @@ public class MenuClientes extends Menu {
 	
 	
 	public String toString() {
-		// TODO Auto-generated method stub
+		
 		return 
 				"¿Qué acción quiere realizar? \n"+
-				"1.Crear nueva cliente \n"+
+				"1.Crear nuevo cliente \n"+
 				"2.Ver clientes\n"+
 				"3.Ver detalles de un cliente\n"+
-				"4.Actualizar una cliente \n"+
-				"5.Borrar una cliente \n"+				
+				"4.Actualizar un cliente \n"+
+				"5.Borrar un cliente \n"+			
 				
-				"0.Volver"	;
+				"0.Volver al menú principal"	;
 	}
 	
 	
 	
 	
 	@Override
-	protected Menu siguienteMenu(String opcion) {
+	public Menu siguienteMenu(String opcion) {
 		while (!opcion.equals("0")) {			
 				
 				switch (opcion) {
@@ -37,14 +37,12 @@ public class MenuClientes extends Menu {
 				case "2":
 					verCliente();
 					break;
-
 				case "3": 
 					actualizarCliente();
 					break;
 				case "4": 
 					borrarCliente();
-					break;
-					
+					break;					
 				case "0":
 					break;
 				default:
@@ -53,48 +51,44 @@ public class MenuClientes extends Menu {
 				}
 			return null;
 		}
-		return new MenuPrincipal();
-		
-		
+		return new MenuPrincipal();		
 	}
 
 	private void crearCliente() {
 		Clientes cli = new Clientes();
-		String datos;
-		boolean valido = false;
-		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Introduzca el nombre del cliente");
+		cli.setNombre(campoValido(","));
+		System.out.println("Introduzca el dni del cliente");
+		cli.setDni(campoValido(","));
+		System.out.println("Introduzca dirección: ");
+		cli.setDireccion(campoValido(","));
+		System.out.println("Introduzca telefono: ");
+		cli.setTelefono(campoValido(","));
+		System.out.println("Introduzca email: ");
+		cli.setEmail(campoValido("^[A-Za-z0-9+_.-]+@(.+)$"));
+		cli.save();
 		
-		System.out.println("Introduzca el nombre que quiere dar a la categoría");
-		datos = keyboard.nextLine();
-		while (!valido ) {
-			valido = !datos.contains(",");
-			if( !valido ) {
-				System.out.println("Los campos introducidos no pueden contener el carácter ','");
-			}else {				
-				cli.setNombre(datos);
-			}			
-		}
-		keyboard.close();
+		
 	}
-	private String comprobarCampo() {
-		Clientes cli = new Clientes();
+	
+	private String campoValido(String regexp) {
 		String datos;
 		boolean valido = false;
-		Scanner keyboard = new Scanner(System.in);
+		Scanner keyboard = new Scanner(System.in);	
 		
-		System.out.println("Introduzca el nombre que quiere dar a la categoría");
 		datos = keyboard.nextLine();
 		while (!valido ) {
-			valido = !datos.contains(",");
+			valido = !datos.contains(regexp);
 			if( !valido ) {
-				System.out.println("Los campos introducidos no pueden contener el carácter ','");
-			}else {				
-				cli.setNombre(datos);
-			}			
+				System.out.println("El campo intoducido no puede contener la expresion regular"
+						+ " '"+ regexp +"', introduzca un valor válido");
+				datos = keyboard.nextLine();
+			}								
 		}
 		keyboard.close();
 		return datos;
 	}
+	
 	
 	
 	
@@ -111,30 +105,26 @@ public class MenuClientes extends Menu {
 	}
 	
 	private void actualizarCliente() {
-		String datos;
-		boolean valido = false;
 		Scanner keyboard = new Scanner(System.in);
-		Integer id;
+		Integer id;		
 		
-		
-		Categoria cat = new Categoria();
-		System.out.println("Introduzca la ID de la categoría que quiere actualizar");
+		Clientes  cli = new Clientes();
+		System.out.println("Introduzca la ID del cliente que quiere actualizar");
 		verCliente();
 		id = Integer.parseInt(keyboard.nextLine());
-		cat = (Categoria) cat.getByid(id);
-		if (cat != null) {
-			System.out.println("Introduzca el nombre que quiere dar a la categoría (Actual: "+cat.getNombre());
-			datos = keyboard.nextLine();
-			while (!valido ) {
-				valido = !datos.contains(",");
-				if( !valido ) {
-					System.out.println("Los campos introducidos no pueden contener el carácter ','");
-				}else {				
-					cat.setNombre(datos);
-					cat.save();				
-				}			
-				System.out.println("Nombre de Categoría "+cat.getId()+" cambiado a "+cat.getNombre());
-			}
+		cli = (Clientes) cli.getByid(id);
+		if (cli != null) {
+			System.out.println("Introduzca el nuevo nombre del cliente");
+			cli.setNombre(campoValido(","));
+			System.out.println("Introduzca el nuevo dni del cliente");
+			cli.setDni(campoValido(","));
+			System.out.println("Introduzca la nueva dirección: ");
+			cli.setDireccion(campoValido(","));
+			System.out.println("Introduzca el nuevo telefono: ");
+			cli.setTelefono(campoValido(","));
+			System.out.println("Introduzca el nuevo email: ");
+			cli.setEmail(campoValido("^[A-Za-z0-9+_.-]+@(.+)$"));
+			cli.save();
 		}else {
 			System.out.println("La categoría introducida no existe");
 		}
