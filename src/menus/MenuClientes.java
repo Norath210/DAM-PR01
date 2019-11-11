@@ -2,6 +2,8 @@ package src.menus;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import src.models.Categoria;
 import src.models.Clientes;
@@ -57,13 +59,13 @@ public class MenuClientes extends Menu {
 	private void crearCliente() {
 		Clientes cli = new Clientes();
 		System.out.println("Introduzca el nombre del cliente");
-		cli.setNombre(campoValido(","));
+		cli.setNombre(campoValido("^[^,]+$"));
 		System.out.println("Introduzca el dni del cliente");
-		cli.setDni(campoValido(","));
+		cli.setDni(campoValido("^[^,]+$"));
 		System.out.println("Introduzca dirección: ");
-		cli.setDireccion(campoValido(","));
+		cli.setDireccion(campoValido("^[^,]+$"));
 		System.out.println("Introduzca telefono: ");
-		cli.setTelefono(campoValido(","));
+		cli.setTelefono(campoValido("^[^,]+$"));
 		System.out.println("Introduzca email: ");
 		cli.setEmail(campoValido("^[A-Za-z0-9+_.-]+@(.+)$"));
 		cli.save();
@@ -72,17 +74,22 @@ public class MenuClientes extends Menu {
 	}
 	
 	private String campoValido(String regexp) {
+		Pattern pattern = Pattern.compile(regexp);
+		
+		
+		
 		String datos;
 		boolean valido = false;
 		Scanner keyboard = new Scanner(System.in);	
 		
 		datos = keyboard.nextLine();
-		while (!valido ) {
-			valido = !datos.contains(regexp);
+		Matcher matcher = pattern.matcher(datos);
+		while (matcher.find() ) {			
 			if( !valido ) {
-				System.out.println("El campo intoducido no puede contener la expresion regular"
+				System.out.println("El campo intoducido debe validar la expresion regular"
 						+ " '"+ regexp +"', introduzca un valor válido");
 				datos = keyboard.nextLine();
+				matcher = pattern.matcher(datos);
 			}								
 		}
 		keyboard.close();
@@ -115,13 +122,13 @@ public class MenuClientes extends Menu {
 		cli = (Clientes) cli.getByid(id);
 		if (cli != null) {
 			System.out.println("Introduzca el nuevo nombre del cliente");
-			cli.setNombre(campoValido(","));
+			cli.setNombre(campoValido("^[^,]*$"));
 			System.out.println("Introduzca el nuevo dni del cliente");
-			cli.setDni(campoValido(","));
+			cli.setDni(campoValido("^[^,]*$"));
 			System.out.println("Introduzca la nueva dirección: ");
-			cli.setDireccion(campoValido(","));
+			cli.setDireccion(campoValido("^[^,]*$"));
 			System.out.println("Introduzca el nuevo telefono: ");
-			cli.setTelefono(campoValido(","));
+			cli.setTelefono(campoValido("^[^,]*$"));
 			System.out.println("Introduzca el nuevo email: ");
 			cli.setEmail(campoValido("^[A-Za-z0-9+_.-]+@(.+)$"));
 			cli.save();
@@ -136,7 +143,7 @@ public class MenuClientes extends Menu {
 		Integer id;
 	
 		Categoria cat = new Categoria();
-		System.out.println("Introduzca la ID de la categoría que quiere actualizar");
+		System.out.println("Introduzca la ID del cliente que quiere borrar");
 		verCliente();
 		id = Integer.parseInt(keyboard.nextLine());
 		cat = (Categoria) cat.getByid(id);

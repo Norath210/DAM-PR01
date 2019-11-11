@@ -91,7 +91,7 @@ public abstract class DbObject {
 		
 		
 		int id=-1;
-		List<DbObject> tabla =this.listarTodos();
+		List<DbObject> tabla =this.list();
 		if (tabla.isEmpty()) {
 			System.out.println("No hay nada en la tabla");
 			return null;
@@ -116,15 +116,18 @@ public abstract class DbObject {
 		return pedido; 
 	}
 	
-	public List<DbObject> listarTodos(){
 	
-	List<DbObject> tabla = DbController.getInstance().list(this);
-	return tabla;
+	
+	public List<DbObject> getByCampos(String campo, String valor){
+		List <DbObject> tabla = DbController.getInstance().getByCampo(campo, valor, this);
+		return tabla;
 	}
+	
+	
 	
 	public void verTodos() {
 		
-		List<DbObject> tabla = this.listarTodos();
+		List<DbObject> tabla = this.list();
 		
 		if (tabla.isEmpty()) {
 			System.out.println("No hay nada en la tabla");
