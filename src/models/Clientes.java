@@ -144,21 +144,7 @@ public class Clientes extends DbObject {
 		}
 				
 	}
-	@Override
-	public void ver() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public DbObject crearPorTeclado() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void editarPorTeclado() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	
 }

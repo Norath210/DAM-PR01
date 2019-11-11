@@ -15,9 +15,7 @@ public abstract class DbObject {
 	public abstract DbObject getDbObject(ResultSet res) throws SQLException;
 	
 	
-	public abstract void ver();
-	public abstract DbObject crearPorTeclado();
-	public abstract void editarPorTeclado();
+
 	
 	
 	

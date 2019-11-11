@@ -120,26 +120,7 @@ public class FacturaLinea extends DbObject {
 			
 		return true;
 	}
-	@Override
-	public void verTodos() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void ver() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public DbObject crearPorTeclado() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void editarPorTeclado() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	
 	
