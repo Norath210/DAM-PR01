@@ -130,7 +130,7 @@ public class Clientes extends DbObject {
 	}
 	@Override
 	public void verTodos() {
-		List<DbObject> tabla = this.listarTodos();
+		List<DbObject> tabla = this.list();
 		
 		if (tabla.isEmpty()) {
 			System.out.println("No hay nada en la tabla");

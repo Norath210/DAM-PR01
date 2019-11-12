@@ -1,15 +1,11 @@
 package src;
-
-import src.models.Clientes;
-
+import src.menus.MenuController;
 public class TestUnit {
+	
 
 	public static void main(String[] args) {
-		System.out.println(new Clientes().getCampos());
-		
-		
-		MenuOld.menuPrincipal();
-
+		MenuController.getInstance().callMenus();
 	}
 
 }
+

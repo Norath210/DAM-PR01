@@ -1,14 +1,13 @@
 package src; 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import src.models.Categoria;
 import src.models.Clientes;
 import src.models.Producto;
 import src.models.comun.DbObject;
 import src.models.comun.Tools; 
-import src.MenuOld;
+
 public class Main {
 	
 	/**
@@ -31,18 +30,12 @@ public class Main {
 	 * *-> Para nota ;)
 	 * 
 	 */
-	
-	
-
 
 	public static void main(String[] args) {
 		
 		// Hacer el Backup del día
 		//Backup.getInstance().doBackup();  
 		
-		/**
-		 * 
-		 * 
 		 Categoria cat = new Categoria();
 		 cat.setNombre("Cat 01");
 		 //cat.save();
@@ -63,14 +56,10 @@ public class Main {
 		 List<DbObject> productos = prod.list();
 		 for (DbObject dbObject : productos) {
 			Producto p = (Producto) dbObject;
-			p.delete();
-			
+			//p.delete();
 			p.setPrecio(100);
 			p.save(); 
-		
 		} 
-		 *
-		 */
 		 
 		 Clientes cli = new Clientes();
 		 cli.setNombre("Cliente");
@@ -85,9 +74,6 @@ public class Main {
 		//statemnt.executeQuery(sql);
 		
 		//con.prepareStatement(sql)
-		 
-		 MenuOld.menuPrincipal();
-		 
 	 
 	}
 

@@ -76,21 +76,17 @@ public class MenuClientes extends Menu {
 	private String campoValido(String regexp) {
 		Pattern pattern = Pattern.compile(regexp);
 		
-		
-		
 		String datos;
-		boolean valido = false;
 		Scanner keyboard = new Scanner(System.in);	
 		
 		datos = keyboard.nextLine();
 		Matcher matcher = pattern.matcher(datos);
-		while (matcher.find() ) {			
-			if( !valido ) {
+		while (matcher.find() ) {		
 				System.out.println("El campo intoducido debe validar la expresion regular"
 						+ " '"+ regexp +"', introduzca un valor válido");
 				datos = keyboard.nextLine();
 				matcher = pattern.matcher(datos);
-			}								
+											
 		}
 		keyboard.close();
 		return datos;

@@ -26,6 +26,7 @@ public class MenuFacturas extends Menu {
 				"7.Borrar una linea de una factura \n"+
 				
 				"0.Volver al menú principal"	;
+		
 	}
 	
 	public Menu siguienteMenu(String opcion) {

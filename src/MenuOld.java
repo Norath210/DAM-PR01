@@ -90,10 +90,8 @@ public class MenuOld {
 			case "1":
 				modelo.verTodos();
 				modelo = modelo.seleccionarObjeto();
-				modelo.ver();
 				break;
 			case "2":
-				modelo = modelo.crearPorTeclado();
 				modelo.save();
 				break;
 			case "3": 
@@ -102,7 +100,6 @@ public class MenuOld {
 				break;
 			case "4": 
 				modelo = modelo.seleccionarObjeto();
-				modelo.editarPorTeclado();
 				break;
 			case SALIR:
 				System.out.println("ByeBye");				

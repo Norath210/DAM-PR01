@@ -28,7 +28,6 @@ public class MenuPrincipal extends Menu{
 	
 	@Override
 	public Menu siguienteMenu(String opcion) {
-	while (!opcion.equals("0")) {			
 		
 		switch (opcion) {
 		case "1":
@@ -43,8 +42,9 @@ public class MenuPrincipal extends Menu{
 			return null;
 		default:
 			System.out.println("Opción no válida");
+			new MenuPrincipal();
 			break;
-		}
+		
 	}
 	
 
