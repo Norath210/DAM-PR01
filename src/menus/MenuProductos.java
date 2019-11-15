@@ -23,7 +23,6 @@ public class MenuProductos extends Menu {
 	}
 	
 	public Menu siguienteMenu(String opcion) {
-		while (!opcion.equals("0")) {			
 				
 				switch (opcion) {
 				case "1":
@@ -46,8 +45,7 @@ public class MenuProductos extends Menu {
 				default:
 					System.out.println("Opción no válida");
 					break;
-				}
-			return null;
+				
 		}
 		return new MenuPrincipal();		
 	}

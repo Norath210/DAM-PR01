@@ -42,6 +42,8 @@ public abstract class DbObject {
 	}
 	
 	
+	
+	
 	private boolean isNullOrEmpty(Object value) {
 		if (value == null) {
 			return true;
@@ -87,35 +89,10 @@ public abstract class DbObject {
 		return data+",'"+value+"'";
 	}
 	
-	public DbObject seleccionarObjeto() {
-		
-		
-		int id=-1;
-		List<DbObject> tabla =this.list();
-		if (tabla.isEmpty()) {
-			System.out.println("No hay nada en la tabla");
-			return null;
-		}
-		
-		Scanner keyboardScanner= new Scanner(System.in);
-		
-		
-		for(DbObject obj: tabla ) {	
-			System.out.println(obj.getId()+" "+obj.toString());
-		}
-		System.out.println("Introduzca la ID del objeto de "+this.getTable()+ " que quiera seleccionar ");
-		try {
-		id = Integer.parseInt(keyboardScanner.nextLine());
-		}catch(Exception ex){
-			System.out.println("Id no válida");
-		}finally {
-			keyboardScanner.close();
-		}
-		DbObject pedido = this.getByid(id);
-		
-		return pedido; 
-	}
 	
+	
+	
+
 	
 	
 	public List<DbObject> getByCampos(String campo, String valor){

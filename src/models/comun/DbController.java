@@ -67,7 +67,6 @@ public class DbController {
 			System.out.println(e);
 			return null;
 		} 
-		
 		return dev;
 	}
 	

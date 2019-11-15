@@ -30,7 +30,6 @@ public class MenuFacturas extends Menu {
 	}
 	
 	public Menu siguienteMenu(String opcion) {
-		while (!opcion.equals("0")) {			
 				
 				switch (opcion) {
 				case "1":
@@ -59,9 +58,8 @@ public class MenuFacturas extends Menu {
 				default:
 					System.out.println("Opción no válida");
 					break;
+				
 				}
-			return null;
-		}
 		return new MenuPrincipal();		
 	}
 
@@ -126,7 +124,10 @@ public class MenuFacturas extends Menu {
 
 	
 	private void crearLineaFactura() {
-		Factura fac = (Factura)new Factura().seleccionarObjeto();
+		Factura fac = (Factura)MenuController.getInstance().seleccionarObjeto(new Factura());
+		if( fac == null) {
+			return;
+		}
 		
 	}
 
@@ -167,26 +168,6 @@ public class MenuFacturas extends Menu {
 		return fecha;
 	}
 
-	private String campoValido(String regexp) {
-		Pattern pattern = Pattern.compile(regexp);
-		
-		
-		
-		String datos;
-		boolean valido = false;
-		Scanner keyboard = new Scanner(System.in);	
-		
-		datos = keyboard.nextLine();
-		Matcher matcher = pattern.matcher(datos);
-		while (matcher.find() ) {		
-				System.out.println("El campo intoducido debe validar la expresion regular"
-						+ " '"+ regexp +"', introduzca un valor válido");
-				datos = keyboard.nextLine();
-				matcher = pattern.matcher(datos);
-											
-		}
-		keyboard.close();
-		return datos;
-	}
+
 
 }
