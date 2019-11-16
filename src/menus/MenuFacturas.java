@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import src.models.Factura;
 import src.models.FacturaLinea;
+import src.models.Producto;
 import src.models.comun.DbObject;
 
 public class MenuFacturas extends Menu {
@@ -62,20 +63,22 @@ public class MenuFacturas extends Menu {
 				}
 		return new MenuPrincipal();		
 	}
-
+	
+	
+	
 	private void borrarLineaFactura() {
-		Factura fac = (Factura)new Factura().seleccionarObjeto();
+		Factura fac = MenuController.eligeFactura();
 		List<DbObject> listFl = new FacturaLinea().getByCampos("id_factura",fac.getId()+"");
 		for(DbObject obj: listFl) {
 			System.out.println(obj.getId()+" "+obj);
 		}
-		FacturaLinea fl = (FacturaLinea) new FacturaLinea().seleccionarObjeto();
+		FacturaLinea fl = MenuController.eligeLineaFactura();
 		fl.delete();
 		
 	}
 
 	private void borrarFactura() {
-		Factura fac = (Factura) new Factura().seleccionarObjeto();
+		Factura fac = MenuController.eligeFactura();
 		List<DbObject> listFl = new FacturaLinea().getByCampos("id_factura",fac.getId()+"");
 		for(DbObject obj: listFl) {
 			obj.delete();
@@ -87,14 +90,14 @@ public class MenuFacturas extends Menu {
 
 	private void editarFactura() {
 		
-		Factura fac = (Factura)new Factura().seleccionarObjeto();
+		Factura fac = MenuController.eligeFactura();
 		
 		System.out.println("Introduzca la fecha de la factura, (formato yyyy/MM/dd) ");
 		fac.setFecha(validarFecha());		
 		System.out.println("Introduzca la serie de la factura,  ");
-		fac.setSerie(Integer.valueOf(campoValido("^\\d+$")));
+		fac.setSerie(Integer.parseInt(MenuController.campoValido("^\\d+$")));
 		System.out.println("Elija un cliente al que asignar la factura");
-		fac.setId_cliente(Integer.valueOf(campoValido("^\\d+$")));
+		fac.setId_cliente(Integer.parseInt(MenuController.campoValido("^\\d+$")));
 			
 		
 	}
@@ -102,7 +105,7 @@ public class MenuFacturas extends Menu {
 	
 
 	private void verLineasFactura() {
-		Factura fac = (Factura)new Factura().seleccionarObjeto();
+		Factura fac = MenuController.eligeFactura();
 		
 		List<DbObject> listFl = new FacturaLinea().getByCampos("id_factura",fac.getId()+"");
 		for(DbObject obj: listFl) {
@@ -124,11 +127,17 @@ public class MenuFacturas extends Menu {
 
 	
 	private void crearLineaFactura() {
-		Factura fac = (Factura)MenuController.getInstance().seleccionarObjeto(new Factura());
+		Factura fac = MenuController.eligeFactura();
 		if( fac == null) {
 			return;
 		}
+		FacturaLinea fl = new FacturaLinea();
+		fl.setId_factura(fac.getId());
+		Producto prod = MenuController.eligeProducto();		
+		fl.setNombre(prod.getNombre());
+		fl.setPrecio(Integer.parseInt(MenuController.campoValido("^\\d+$")));
 		
+		fl.save();
 	}
 
 	private void crearFactura() {
@@ -136,36 +145,17 @@ public class MenuFacturas extends Menu {
 		Factura fac = new Factura();
 		
 		System.out.println("Introduzca la fecha de la factura, (formato yyyy/MM/dd) ");
-		fac.setFecha(validarFecha());		
+		fac.setFecha(MenuController.validarFecha());		
 		System.out.println("Introduzca la serie de la factura,  ");
-		fac.setSerie(Integer.valueOf(campoValido("^\\d+$")));
+		fac.setSerie(Integer.parseInt(MenuController.campoValido("^\\d+$")));
 		System.out.println("Elija un cliente al que asignar la factura");
-		fac.setId_cliente(Integer.valueOf(campoValido("^\\d+$")));
+		fac.setId_cliente(Integer.parseInt(MenuController.campoValido("^\\d+$")));
 			
 		
 	}
 	
 	private Date validarFecha() {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		Scanner keyboard = new Scanner(System.in);	
-		Date fecha = new Date();
-		String datos;
-		boolean validado = false;
-		
-		datos = keyboard.nextLine();
-		
-		while(!validado) {
-			try {
-				fecha = sdf.parse(datos);
-				validado = true;
-			} catch (ParseException e) {
-				System.err.println("Error: el formato de la fecha debe ser: yyyy/MM/dd");
-				e.printStackTrace();
-			}
-		}
-		keyboard.close();
-		return fecha;
 	}
 
 

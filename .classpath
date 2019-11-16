@@ -4,6 +4,5 @@
 	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/SQLite"/>
 	<classpathentry kind="src" path=""/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Sqlite"/>
-	<classpathentry kind="lib" path="C:/Users/Castelao/Desktop/sqlite-jdbc-3.27.2.1.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
