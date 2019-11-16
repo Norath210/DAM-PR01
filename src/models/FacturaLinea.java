@@ -2,12 +2,8 @@ package src.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import src.models.comun.DbController;
 import src.models.comun.DbObject;
 
 public class FacturaLinea extends DbObject {
@@ -50,6 +46,11 @@ public class FacturaLinea extends DbObject {
 	}
 	
 	@Override
+	public boolean isNew() {
+		return (this.id == null);
+	}
+	
+	@Override
 	public String getTable() {
 		return "facturas_linea";
 	}
@@ -88,41 +89,5 @@ public class FacturaLinea extends DbObject {
 	public String toString() {
 		return this.getValues();
 	}
-
-	public static FacturaLinea createByValues(String values) {
-		
-		FacturaLinea item = new FacturaLinea();
-		String[] arValues = values.split(",");
-		
-		if(new FacturaLinea().getByid(Integer.valueOf(arValues[2]))!=null) {		
-			item.setId_factura(Integer.valueOf(arValues[0]));
-			item.setNombre(arValues[1]);
-			item.setPrecio(Integer.valueOf(arValues[2]));				
-			return item;
-		}else {
-		return null;
-		}
-	}
-	@Override
-	public String getAllCampos() {	
-		return "id_factura, nombre, precio";
-	}
-	public boolean borrarLineas(Integer id) {
-		if (id == null) {
-			return false;
-		}
-		List<DbObject> lineas = DbController.getInstance().getByCampo("id_factura", id+"", new FacturaLinea()) ;
-		
-		for(DbObject lf : lineas) {
-			lf.delete();
-		}
-		
-			
-		return true;
-	}
-
-	
-	
-	
 	
 }

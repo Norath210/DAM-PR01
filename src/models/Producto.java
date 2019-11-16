@@ -3,7 +3,6 @@ package src.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 import src.models.comun.DbObject;
 
@@ -65,31 +64,28 @@ public class Producto extends DbObject {
 		campos = getCorrectCampos(campos, "nombre", this.nombre);
 		campos = getCorrectCampos(campos, "precio", this.precio);
 		campos = getCorrectCampos(campos, "stock" , this.stock);
-		campos = getCorrectCampos(campos, "id_categoria" , this.id_categoria);  
+		campos = getCorrectCampos(campos, "id_categoria" , this.id_categoria);   
 		return campos;
 	}
-	
-	
-	
-	
 	@Override
 	public String getValues() {
 		String value = ""; 
 		value = getCorrectValues(value, this.nombre);
 		value = getCorrectValues(value, this.precio); 
 		value = getCorrectValues(value, this.stock);
-		value = getCorrectValues(value, this.id_categoria); 
+		value = getCorrectValues(value, this.id_categoria);  
 		return value;		
 	}
 	
 	@Override
 	public DbObject getDbObject(ResultSet res) throws SQLException {
 		Producto item = new Producto();
+		item.setId( res.getInt("id") ); 
 		
 		int created = res.getInt("created");
 		Date date = new Date(created);		
 		item.setCreated( date );
-		item.setId(res.getInt("id"));
+		
 		item.setNombre( res.getString("nombre") );
 		item.setPrecio( res.getInt("precio") );
 		item.setStock( res.getInt("stock") );
@@ -103,27 +99,10 @@ public class Producto extends DbObject {
 		return this.getValues();
 	}
 	
-	public static Producto createByValues(String values) {		
-		
-		Producto item = new Producto();
-		String[] arValues = values.split(",");
-		
-		if(new Producto().getByid(Integer.parseInt(arValues[3]))!=null) {
-			item.setNombre(arValues[0]);
-			item.setPrecio( Integer.parseInt(arValues[1]) );
-			item.setStock(Integer.parseInt(arValues[2]));
-			item.setId_categoria(Integer.parseInt(arValues[3]));
-			return item;
-		}else {
-			System.err.println("La categoría de producto introducida no existe");
-			return null;
-		}
+	
+	@Override
+	public boolean isNew() {
+		return (this.id == null);
 	}
-	
-	public String getAllCampos() {
-		return "nombre, precio, stock,id_categoría";
-	}
-	
-	
 	
 }

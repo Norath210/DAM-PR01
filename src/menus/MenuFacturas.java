@@ -1,13 +1,9 @@
 package src.menus;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import java.util.List;
+
+import src.models.Clientes;
 import src.models.Factura;
 import src.models.FacturaLinea;
 import src.models.Producto;
@@ -23,8 +19,9 @@ public class MenuFacturas extends Menu {
 				"3.Ver facturas\n"+
 				"4.Ver lineas de una factura\n"+
 				"5.Editar una factura \n"+
-				"6.Borrar una factura \n"+	
-				"7.Borrar una linea de una factura \n"+
+				"6.Editar una linea de una factura \n"+
+				"7.Borrar una factura \n"+	
+				"8.Borrar una linea de una factura \n"+
 				
 				"0.Volver al menú principal"	;
 		
@@ -48,24 +45,47 @@ public class MenuFacturas extends Menu {
 				case "5":
 					editarFactura();
 					break;
-				case "6":	
+				case "6":
+					editarLineaFactura();
+					break;
+				case "7":	
 					borrarFactura();
 					break;		
-				case "7":
+				case "8":
 					borrarLineaFactura();
 					break;
 				case "0":
-					break;
+					return new MenuPrincipal();
 				default:
 					System.out.println("Opción no válida");
 					break;
 				
 				}
-		return new MenuPrincipal();		
+		return new MenuFacturas();		
 	}
 	
 	
 	
+	private void editarLineaFactura() {
+		FacturaLinea fl = MenuController.eligeLineaFactura();
+		
+		if( fl == null) {
+			System.out.println("Linea de factura no encontrada");
+			return;
+		}
+		Factura fac = MenuController.eligeFactura();
+		if( fac == null) {
+			return;
+		}
+		
+		fl.setId_factura(fac.getId());
+		Producto prod = MenuController.eligeProducto();		
+		fl.setNombre(prod.getNombre());
+		fl.setPrecio(Integer.parseInt(MenuController.campoValido("^\\d+$")));
+		
+		
+	}
+
 	private void borrarLineaFactura() {
 		Factura fac = MenuController.eligeFactura();
 		List<DbObject> listFl = new FacturaLinea().getByCampos("id_factura",fac.getId()+"");
@@ -91,9 +111,13 @@ public class MenuFacturas extends Menu {
 	private void editarFactura() {
 		
 		Factura fac = MenuController.eligeFactura();
+		if (fac == null) {
+			System.out.println("La factura no existe");			
+			return ;
+		}
 		
 		System.out.println("Introduzca la fecha de la factura, (formato yyyy/MM/dd) ");
-		fac.setFecha(validarFecha());		
+		fac.setFecha(MenuController.validarFecha());		
 		System.out.println("Introduzca la serie de la factura,  ");
 		fac.setSerie(Integer.parseInt(MenuController.campoValido("^\\d+$")));
 		System.out.println("Elija un cliente al que asignar la factura");
@@ -144,19 +168,25 @@ public class MenuFacturas extends Menu {
 		
 		Factura fac = new Factura();
 		
+
+		System.out.println("Elija un cliente al que asignar la factura");
+		Clientes cli = MenuController.eligeCliente();
+		if (cli== null) {
+			System.out.println("El cliente no existe");
+			return;
+		}
+		
 		System.out.println("Introduzca la fecha de la factura, (formato yyyy/MM/dd) ");
 		fac.setFecha(MenuController.validarFecha());		
 		System.out.println("Introduzca la serie de la factura,  ");
 		fac.setSerie(Integer.parseInt(MenuController.campoValido("^\\d+$")));
-		System.out.println("Elija un cliente al que asignar la factura");
 		fac.setId_cliente(Integer.parseInt(MenuController.campoValido("^\\d+$")));
 			
+		fac.save();
 		
 	}
 	
-	private Date validarFecha() {
-		
-	}
+	
 
 
 

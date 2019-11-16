@@ -1,8 +1,6 @@
 package src.models.comun;
 
 import java.util.Random;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Tools {
 
@@ -27,6 +25,4 @@ public class Tools {
 	    
 	    return Integer.valueOf(num);
 	}
-		
-
 }

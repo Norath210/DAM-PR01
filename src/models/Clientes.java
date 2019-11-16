@@ -3,9 +3,7 @@ package src.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
-import src.models.comun.DbController;
 import src.models.comun.DbObject;
 
 public class Clientes extends DbObject {
@@ -73,6 +71,11 @@ public class Clientes extends DbObject {
 	}
 	
 	@Override
+	public boolean isNew() {
+		return (this.id == null);
+	}
+	
+	@Override
 	public String getCampos() {
 		String campos = "";
 		campos = getCorrectCampos(campos, "nombre"   , this.nombre);
@@ -109,42 +112,5 @@ public class Clientes extends DbObject {
 				
 		return item;
 	}
-	
-
-	public static Clientes createByValues(String values) {
-		
-		Clientes item = new Clientes();
-		String[] arValues = values.split(",");
-		item.setNombre(arValues[0]);
-		item.setDni(arValues[1]);
-		item.setDireccion(arValues[2]);
-		item.setTelefono(arValues[3]);
-		item.setEmail(arValues[4]);
-			
-		return item;
-		
-	}
-	@Override
-	public String getAllCampos() {
-		return "nombre, dni, direccion, telefono, email";
-	}
-	@Override
-	public void verTodos() {
-		List<DbObject> tabla = this.list();
-		
-		if (tabla.isEmpty()) {
-			System.out.println("No hay nada en la tabla");
-			return;
-		}
-		
-		for(DbObject obj: tabla ) {	
-			Clientes cli =(Clientes) obj;
-			
-			System.out.println(cli.getId()+" "+obj.toString());
-		}
-				
-	}
-	
-	
 	
 }

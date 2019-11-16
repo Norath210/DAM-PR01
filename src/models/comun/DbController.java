@@ -25,18 +25,25 @@ public class DbController {
 		}
 		return instance;
 	}
-
+	
 	public Connection getConnection() {
 		return con;
 	}
-
+	
+	/**
+	 * Ejecuta la consulta SQL que se pasa por parametro
+	 * 
+	 * @param sql - Tiene que ser una consulta SQL valida y correcta
+	 * @return Devuelve si fue bien o mal la ejecución de la consulta. Puede devolver false; si la consulta no está bien formulada
+	 */
 	private boolean doExecute(String sql) {
 		try {
-
-			Statement statemnt = this.con.createStatement();
+			
+			Statement statemnt = this.con.createStatement(); 
 			statemnt.execute(sql);
-
-		} catch (SQLException e) {
+			statemnt.close();
+		 
+		} catch (SQLException e) { 
 			e.printStackTrace();
 			System.out.println(e);
 			return false;
@@ -62,14 +69,22 @@ public class DbController {
 				DbObject nObj = obj.getDbObject(res);
 				dev.add(nObj);
 			} 
+			statemnt.close();
 		} catch (SQLException e) { 
 			e.printStackTrace();
 			System.out.println(e);
 			return null;
 		} 
+		
 		return dev;
 	}
 	
+	/**
+	 * Guarda un objeto nuevo en la base de datos
+	 * <strong>NOTA: No comprueba si el objecto existe o tiene campos duplicados</strong>
+	 * @param obj - Tiene que ser un objecto valido; con los datos correctos de las funciones: getTable, getCampos, getValues
+	 * @return Devuelve si fue bien o mal el salvado del objecto. Puede devolver false; si la consulta no está bien formulada
+	 */
 	private boolean doSave(DbObject obj) {
 		String TABLA = obj.getTable();
 		String campos = obj.getCampos();
@@ -88,6 +103,14 @@ public class DbController {
 	}
 	
 	private boolean doUpdate(DbObject obj) {
+		/*
+		 * Modificaciones es el cuerpo de la consulta del update.
+		 * Se construye con el string campos y el values de cada objecto; 
+		 * tenemos que presuponer que ambos campos son iguales y tienen el
+		 * mismo tamaño. Siendo esto así; podemos hacer un split por el campo
+		 * de separación ','; y recoger la posición del array para concatenarlo y 
+		 * poner un igual en medio 
+		 */
 		
 		String TABLA = obj.getTable();
 		String campos = obj.getCampos();
@@ -101,16 +124,23 @@ public class DbController {
 			String campo = arCampos[i];
 			String valor = arValores[i];
 			
+			// Nos genera un string equivalente a: 'campo'=valor 
+			// y lo concatena a modificaciones
 			modificaciones = modificaciones + campo+"="+valor;
 			//Posible solucion a evitar que tenga coma en el ultimo elemento.
-			if (i < arCampos.length) {
+			if (i <= arCampos.length) {
 				modificaciones = modificaciones+",";
 			}
+		}
+		// Comprobamos que el ultimo caracter es una , y la eliminamos. 
+		// Para evitar problemas con la consulta.
+		if (modificaciones.charAt(modificaciones.length()-1) == ',') {
+			modificaciones = modificaciones.substring(0, modificaciones.length()-1);
 		}
 		// Otra posible solución a tener coma al final del elemento
 		//modificaciones = modificaciones.substring(0, modificaciones.length()-1);  
 		
-		String sql = "UPDATE "+TABLA+" SET "+modificaciones+" WHERE 'id'="+obj.getId();
+		String sql = "UPDATE "+TABLA+" SET "+modificaciones+" WHERE  id ="+obj.getId();
 		System.out.println(sql);
 		
 		boolean check = this.doExecute(sql); 
@@ -122,9 +152,15 @@ public class DbController {
 		return check;
 	}
 	
+	/**
+	 * Guarda en la base de datos el objecto DBOject que le pasemos;
+	 * <strong>NOTA: Tambien actualiza un objecto, diferencia el objecto nuevo de uno de la base de datos por el campo id==null; o la función isNew()</strong>
+	 * @param obj - Tiene que ser un objecto valido; con los datos correctos de las funciones: getTable, getCampos, getValues
+	 * @return Devuelve si fue bien o mal el salvado del objecto. Puede devolver false; si la consulta no está bien formulada
+	 */
 	public boolean saveDb(DbObject obj) {  
 		
-		if (obj.getId() == null) {
+		if (obj.isNew()) {
 			return this.doSave(obj);
 		}
 		 
@@ -165,11 +201,11 @@ public class DbController {
 	 * <strong>EJERCICIO</strong>
 	 *  Dado un ID de un modelo; devuelve el elemento de la base de datos.
 	 *  
-	 * @param obj - una clase que extienda de DbObject
+	 * @param dbObject - una clase que extienda de DbObject
 	 * @param id - ID que tenemos que buscar en la tabla del objeto
 	 * @return - En caso de encontrar el registro; debe devolver un objeto de ese tipo. <br/> En caso de no encontrarlo; debe devovler un NULL. <br/> En caso de Exception; devolver null.
 	 */
-	public  DbObject getByid(DbObject obj, Integer id) {
+	public DbObject getByid(DbObject obj, Integer id) {
 
 		String sql = "SELECT * FROM "+obj.getTable()+" WHERE id="+id; 
 		List<DbObject> dev = this.doExecuteQuery(sql, obj);
@@ -179,7 +215,7 @@ public class DbController {
 		}
 		
 		return dev.get(0);
-	}	
+	}
 	
 	/**
 	* @param campo - campo por el que buscar
@@ -196,4 +232,6 @@ public class DbController {
 		return dev;
 	}
 	
+	
+
 }

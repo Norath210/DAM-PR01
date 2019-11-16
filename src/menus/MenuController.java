@@ -85,15 +85,13 @@ public class MenuController {
 				System.out.println("El valor introducido para el campo no es válido");
 				datos = keyboard.nextLine();										
 		}
-		keyboard.close();
 		return datos;
 	}
 	
 	
 	public static String campoValido(String regex) {
 		return MenuController.getInstance().validarCampo(regex);
-	}
-	
+	}	
 	
 	public static Factura eligeFactura() {
 		return (Factura)MenuController.getInstance().seleccionarObjeto(new Factura());

@@ -72,7 +72,7 @@ public class DbSqlite {
 		
         try {
             // db parameters
-        	// conn = DriverManager.getConnection(Config.DBMYSQL, Config.DBMYSQL_USER, Config.DBMYSQL_PASS);
+        //	conn = DriverManager.getConnection(Config.DBMYSQL, Config.DBMYSQL_USER, Config.DBMYSQL_PASS);
             // create a connection to the database
             conn = DriverManager.getConnection(Config.DBSQLITE); // Para SQLITE
             

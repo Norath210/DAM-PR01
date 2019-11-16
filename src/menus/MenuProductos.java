@@ -17,7 +17,6 @@ public class MenuProductos extends Menu {
 				"4.Editar un producto\n"+
 				"5.Borrar un producto \n"+	
 				
-				
 				"0.Volver al menú principal"	;
 		
 	}
@@ -41,18 +40,34 @@ public class MenuProductos extends Menu {
 					borrarProducto();
 					break;				
 				case "0":
-					break;
+					return new MenuPrincipal();
 				default:
 					System.out.println("Opción no válida");
 					break;
 				
 		}
-		return new MenuPrincipal();		
+		return new MenuProductos();		
 	}
 
 	private void crearProducto() {
 		Producto prod = new Producto();
 		
+		
+		System.out.println("Elija la categoría del producto");
+		Categoria cat = MenuController.eligeCategoria();
+		if (cat == null) {
+			System.out.println("Categoría no válida");
+			return;
+		}
+
+		System.out.println("Introduzca el nombre del producto");
+		prod.setNombre(MenuController.campoValido("^[^,]+$"));
+		System.out.println("Introduzca el precio del producto (en centimos)");
+		prod.setPrecio(Integer.parseInt(MenuController.campoValido("^[^,]+$")));
+		System.out.println("Introduzca la cantidad de producto en stock ");
+		prod.setStock(Integer.parseInt(MenuController.campoValido("^[^,]+$")));
+		
+		prod.setId_categoria(cat.getId());
 		prod.save();
 	}
 
@@ -64,28 +79,50 @@ public class MenuProductos extends Menu {
 	}
 
 	private void verProductosCat() {
-		Categoria cat = (Categoria) new Categoria().seleccionarObjeto();
-		List<DbObject> prodList =  new Producto().list();
-		
+		Categoria cat = MenuController.eligeCategoria();
+		if(cat== null) {
+			System.out.println("Categoría no encontrada");
+			return;
+		}
+		List<DbObject> prodList =  new Producto().list();		
 		for(DbObject obj : prodList) {
 			Producto prod = (Producto) obj;
 			if(prod.getId_categoria() == cat.getId()) {
-			System.out.println(prod.getId()+" "+prod.toString());
+				System.out.println(prod.getId()+" "+prod.toString());
 			}
 		}
-		
-		
 	}
 
 	private void editarProducto() {
-		Producto prod = (Producto) new Producto().seleccionarObjeto();
+		Producto prod = MenuController.eligeProducto();
+		if (prod==null) {
+			System.out.println("Producto no encontrado");
+			return;
+		}
+		System.out.println("Elija la nueva categoría del producto");
+		Categoria cat = MenuController.eligeCategoria();
+		if (cat == null) {
+			System.out.println("Categoría no válida");
+			return;
+		}
 		
+		System.out.println("Introduzca el nombre del producto Actual: "+prod.getNombre());
+		prod.setNombre(MenuController.campoValido("^[^,]+$"));
+		System.out.println("Introduzca el precio del producto (en centimos) Actual: "+prod.getPrecio());
+		prod.setPrecio(Integer.parseInt(MenuController.campoValido("^[^,]+$")));
+		System.out.println("Introduzca la cantidad de producto en stock Actual: "+prod.getStock());
+		prod.setStock(Integer.parseInt(MenuController.campoValido("^[^,]+$")));
+		
+		prod.setId_categoria(cat.getId());
 		prod.save();
 	}
 
 	private void borrarProducto() {
-		Producto prod = (Producto) new Producto().seleccionarObjeto();
-		
+		Producto prod = MenuController.eligeProducto();
+		if(prod == null) {
+			System.out.println("Producto no encontrado");
+			return;
+		}
 		prod.delete();
 		
 	}

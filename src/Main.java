@@ -1,14 +1,7 @@
 package src; 
-import java.util.ArrayList;
-import java.util.List;
 
-import src.models.Categoria;
-import src.models.Clientes;
-import src.models.Producto;
-import src.models.comun.DbObject;
-import src.models.comun.Tools;
-import src.menus.Menu;
 import src.menus.MenuController;
+import src.models.Categoria;
 
 public class Main {
 	
@@ -75,7 +68,15 @@ public class Main {
 		 System.out.println(cli01);
 		
 		*/
-		MenuController.getInstance().callMenus();
+		
+		
+		/*
+		 *  <strong>LAS OPERACIONES DE EDICIÓN NO FUNCIONAN A PESAR DE QUE DbController las acepta</strong>
+		 */
+		
+		
+		
+		 MenuController.getInstance().callMenus();
 		
 		
 		

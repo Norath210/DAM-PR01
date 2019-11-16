@@ -6,7 +6,7 @@ import java.util.Date;
 
 import src.models.comun.DbObject;
 
-public class Categoria extends DbObject {
+public class Categoria extends DbObject { 
 
 	private Integer id;
 	private Date created;
@@ -62,20 +62,10 @@ public class Categoria extends DbObject {
 		
 		return item;
 	}
-
-	public static Categoria createByValues(String values) {
-		Categoria item = new Categoria();		
-		String[] arValues = values.split(",");
-		item.setNombre(arValues[0]) ;	
-			
-		return item;
-		
+	
+	@Override
+	public boolean isNew() {
+		return (this.id == null);
 	}
-	public String getAllCampos() {
-		return "nombre";
-	}
-	
-	
-	
 	
 }

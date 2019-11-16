@@ -1,10 +1,6 @@
 package src.menus;
 
-import src.models.Categoria;
-import src.models.Clientes;
-import src.models.Factura;
-import src.models.Producto;
-import src.models.comun.DbObject;
+
 public class MenuPrincipal extends Menu{
 	
 	public static Menu eligeTabla(String Opcion) {
@@ -42,13 +38,8 @@ public class MenuPrincipal extends Menu{
 			return null;
 		default:
 			System.out.println("Opción no válida");
-			new MenuPrincipal();
-			break;
-		
-	}
-	
-
-		return null;
+			return new MenuPrincipal();		
+		}
 	}
 
 }
