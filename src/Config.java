@@ -11,7 +11,7 @@ public class Config {
 	public static final String DBMYSQL_PORT   = "3306";
 	public static final String DBMYSQL_DBNAME = "mitienda";
 	public static final String DBMYSQL_USER   = "root";
-	public static final String DBMYSQL_PASS   = "";
+	public static final String DBMYSQL_PASS   = "1234";
 	
 	public static final String DBSQLITE = "jdbc:sqlite:"+PATH_DB+DBNAME;
 	public static final String DBMYSQL  = "jdbc:mysql://"+DBMYSQL_HOST+":"+DBMYSQL_PORT+"/"+DBMYSQL_DBNAME;

@@ -116,14 +116,18 @@ public class MenuFacturas extends Menu {
 			return ;
 		}
 		
+		System.out.println("Elija un cliente al que asignar la factura");
+		Clientes cli = MenuController.eligeCliente();
+		if (cli== null) {
+			System.out.println("El cliente no existe");
+			return;
+		}
+		
 		System.out.println("Introduzca la fecha de la factura, (formato yyyy/MM/dd) ");
 		fac.setFecha(MenuController.validarFecha());		
 		System.out.println("Introduzca la serie de la factura,  ");
 		fac.setSerie(Integer.parseInt(MenuController.campoValido("^\\d+$")));
-		System.out.println("Elija un cliente al que asignar la factura");
-		fac.setId_cliente(Integer.parseInt(MenuController.campoValido("^\\d+$")));
-			
-		
+		fac.setId_cliente(cli.getId());
 	}
 		
 	
@@ -180,7 +184,7 @@ public class MenuFacturas extends Menu {
 		fac.setFecha(MenuController.validarFecha());		
 		System.out.println("Introduzca la serie de la factura,  ");
 		fac.setSerie(Integer.parseInt(MenuController.campoValido("^\\d+$")));
-		fac.setId_cliente(Integer.parseInt(MenuController.campoValido("^\\d+$")));
+		fac.setId_cliente(cli.getId());
 			
 		fac.save();
 		
