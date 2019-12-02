@@ -66,7 +66,7 @@ public class MenuClientes extends Menu {
 		System.out.println("Introduzca el nombre del cliente");
 		cli.setNombre(MenuController.campoValido("^[^,]+$"));
 		System.out.println("Introduzca el dni del cliente");
-		cli.setDni(MenuController.campoValido("^[^,]+$"));
+		cli.setDni(MenuController.campoValido("\\d{8}[A-HJ-NP-TV-Z]"));
 		System.out.println("Introduzca dirección: ");
 		cli.setDireccion(MenuController.campoValido("^[^,]+$"));
 		System.out.println("Introduzca telefono: ");

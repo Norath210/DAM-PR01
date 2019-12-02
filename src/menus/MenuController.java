@@ -98,8 +98,39 @@ public class MenuController {
 	}
 	
 	public static FacturaLinea eligeLineaFactura() {
-		return (FacturaLinea) MenuController.getInstance().seleccionarObjeto(new FacturaLinea());
+		
+		Factura fac = MenuController.eligeFactura();
+		List<DbObject> listFl = new FacturaLinea().getByCampos("id_factura",fac.getId()+"");
+		for(DbObject obj: listFl) {
+			System.out.println(obj.getId()+" "+obj);
+		}
+		
+		
+		if (listFl.isEmpty()) {
+			System.out.println("No hay nada en la tabla");
+			return null;
+		}
+		
+		for(DbObject dbo: listFl ) {	
+			System.out.println(dbo.getId()+" "+dbo.toString());
+		}
+		System.out.println("Introduzca la ID del objeto de FacturaLinea que quiera seleccionar ");
+		Integer id;
+		try {
+			id = Integer.parseInt(MenuController.getInstance().keyboard.nextLine());
+		}catch(NumberFormatException ex){
+			System.out.println("Id no válida");
+			return null;
+		}
+		FacturaLinea pedido = (FacturaLinea) new FacturaLinea().getByid(id);		
+		
+		return pedido; 
 	}
+		
+		
+		
+		
+		
 	
 	public static Clientes eligeCliente() {
 		return (Clientes)MenuController.getInstance().seleccionarObjeto(new Clientes());
